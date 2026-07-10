@@ -30,3 +30,4 @@ data/processed/
 # Logs
 logs/
 *.log
+.env
