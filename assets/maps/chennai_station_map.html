@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_e1b9467274ba60ca979b318214ce9dad {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+</head>
+<body>
+    
+    
+    <div style="
+        position: fixed;
+        top: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 9999;
+        background: white;
+        padding: 10px 18px;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+        font-family: Arial, sans-serif;
+        font-size: 18px;
+        font-weight: bold;
+    ">
+        Chennai Air Quality Monitoring Network
+    </div>
+    
+    
+            <div class="folium-map" id="map_e1b9467274ba60ca979b318214ce9dad" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_e1b9467274ba60ca979b318214ce9dad = L.map(
+                "map_e1b9467274ba60ca979b318214ce9dad",
+                {
+                    center: [13.0827, 80.2707],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 11,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+            L.control.scale().addTo(map_e1b9467274ba60ca979b318214ce9dad);
+
+            
+
+        
+    
+            var tile_layer_33c5ee5cc15e0417ead824ad1afbda6d = L.tileLayer(
+                "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 20,
+  "maxNativeZoom": 20,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors \u0026copy; \u003ca href=\"https://carto.com/attributions\"\u003eCARTO\u003c/a\u003e",
+  "subdomains": "abcd",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_33c5ee5cc15e0417ead824ad1afbda6d.addTo(map_e1b9467274ba60ca979b318214ce9dad);
+        
+    
+            var circle_marker_c3ad3e96bede89c22196f5d5112123d6 = L.circleMarker(
+                [12.99711389, 80.19151667],
+                {"bubblingMouseEvents": true, "color": "gray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "gray", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 2}
+            ).addTo(map_e1b9467274ba60ca979b318214ce9dad);
+        
+    
+        var popup_0406962dd7cff215f63fc688f0c2ee1b = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_69533e4a7997bd419708154d588afdb8 = $(`<div id="html_69533e4a7997bd419708154d588afdb8" style="width: 100.0%; height: 100.0%;">     <div style="width: 280px;">         <h4 style="margin-bottom: 8px;">             Alandur Bus Depot         </h4>          <b>Location ID:</b> 378<br>         <b>Provider:</b> CPCB<br>         <b>Latitude:</b> 12.99711389<br>         <b>Longitude:</b> 80.19151667<br>         <b>Pollutants:</b> co,no2,o3,pm25,so2<br>         <b>First measurement:</b> 2016-03-22T06:15:00+05:30<br>         <b>Last measurement:</b> 2018-02-22T09:15:00+05:30     </div>     </div>`)[0];
+                popup_0406962dd7cff215f63fc688f0c2ee1b.setContent(html_69533e4a7997bd419708154d588afdb8);
+            
+        
+
+        circle_marker_c3ad3e96bede89c22196f5d5112123d6.bindPopup(popup_0406962dd7cff215f63fc688f0c2ee1b)
+        ;
+
+        
+    
+    
+            circle_marker_c3ad3e96bede89c22196f5d5112123d6.bindTooltip(
+                `<div>
+                     Alandur Bus Depot — Inactive or excluded station
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_6aba897102493968f442addf2c8b6b24 = L.circleMarker(
+                [13.052371, 80.251932],
+                {"bubblingMouseEvents": true, "color": "gray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "gray", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 2}
+            ).addTo(map_e1b9467274ba60ca979b318214ce9dad);
+        
+    
+        var popup_e6e520eaab3e02a5bff9d4191cd39f6b = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_d71d0672a629fdaff23a11f769eae84f = $(`<div id="html_d71d0672a629fdaff23a11f769eae84f" style="width: 100.0%; height: 100.0%;">     <div style="width: 280px;">         <h4 style="margin-bottom: 8px;">             US Diplomatic Post: Chennai         </h4>          <b>Location ID:</b> 2461<br>         <b>Provider:</b> StateAir Chennai<br>         <b>Latitude:</b> 13.052371<br>         <b>Longitude:</b> 80.251932<br>         <b>Pollutants:</b> pm25<br>         <b>First measurement:</b> 2016-01-30T06:00:00+05:30<br>         <b>Last measurement:</b> 2016-11-09T22:00:00+05:30     </div>     </div>`)[0];
+                popup_e6e520eaab3e02a5bff9d4191cd39f6b.setContent(html_d71d0672a629fdaff23a11f769eae84f);
+            
+        
+
+        circle_marker_6aba897102493968f442addf2c8b6b24.bindPopup(popup_e6e520eaab3e02a5bff9d4191cd39f6b)
+        ;
+
+        
+    
+    
+            circle_marker_6aba897102493968f442addf2c8b6b24.bindTooltip(
+                `<div>
+                     US Diplomatic Post: Chennai — Inactive or excluded station
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_7d39ebff27b71bde96114f1681aa13e0 = L.circleMarker(
+                [12.99251389, 80.23744722],
+                {"bubblingMouseEvents": true, "color": "gray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "gray", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 2}
+            ).addTo(map_e1b9467274ba60ca979b318214ce9dad);
+        
+    
+        var popup_013082c5381f0b07f924084ea811bfa8 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_6f4b722b261e172276780c5ed9296c87 = $(`<div id="html_6f4b722b261e172276780c5ed9296c87" style="width: 100.0%; height: 100.0%;">     <div style="width: 280px;">         <h4 style="margin-bottom: 8px;">             IIT         </h4>          <b>Location ID:</b> 2549<br>         <b>Provider:</b> CPCB<br>         <b>Latitude:</b> 12.99251389<br>         <b>Longitude:</b> 80.23744722<br>         <b>Pollutants:</b> co,no2,o3,pm25,so2<br>         <b>First measurement:</b> 2016-03-22T06:15:00+05:30<br>         <b>Last measurement:</b> 2018-02-22T09:15:00+05:30     </div>     </div>`)[0];
+                popup_013082c5381f0b07f924084ea811bfa8.setContent(html_6f4b722b261e172276780c5ed9296c87);
+            
+        
+
+        circle_marker_7d39ebff27b71bde96114f1681aa13e0.bindPopup(popup_013082c5381f0b07f924084ea811bfa8)
+        ;
+
+        
+    
+    
+            circle_marker_7d39ebff27b71bde96114f1681aa13e0.bindTooltip(
+                `<div>
+                     IIT — Inactive or excluded station
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_f51c7ad2b1342fa47b96cf1360e0bd10 = L.circleMarker(
+                [13.164544, 80.26285],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9, "stroke": true, "weight": 2}
+            ).addTo(map_e1b9467274ba60ca979b318214ce9dad);
+        
+    
+        var popup_312567ec89aa8c6734c5f878334fe650 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_6fa401057c2d2c60a8ed3dfb71873924 = $(`<div id="html_6fa401057c2d2c60a8ed3dfb71873924" style="width: 100.0%; height: 100.0%;">     <div style="width: 280px;">         <h4 style="margin-bottom: 8px;">             Manali, Chennai - CPCB         </h4>          <b>Location ID:</b> 2586<br>         <b>Provider:</b> CPCB<br>         <b>Latitude:</b> 13.164544<br>         <b>Longitude:</b> 80.26285<br>         <b>Pollutants:</b> co,no,no2,nox,o3,pm10,pm25,relativehumidity,so2,temperature,wind_direction,wind_speed<br>         <b>First measurement:</b> 2016-03-21T15:30:00+05:30<br>         <b>Last measurement:</b> 2026-07-12T17:45:00+05:30     </div>     </div>`)[0];
+                popup_312567ec89aa8c6734c5f878334fe650.setContent(html_6fa401057c2d2c60a8ed3dfb71873924);
+            
+        
+
+        circle_marker_f51c7ad2b1342fa47b96cf1360e0bd10.bindPopup(popup_312567ec89aa8c6734c5f878334fe650)
+        ;
+
+        
+    
+    
+            circle_marker_f51c7ad2b1342fa47b96cf1360e0bd10.bindTooltip(
+                `<div>
+                     Manali, Chennai - CPCB — Active candidate station
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_9089bd823b95fa7679e90e5d236e7e99 = L.circleMarker(
+                [13.0052189, 80.2398125],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9, "stroke": true, "weight": 2}
+            ).addTo(map_e1b9467274ba60ca979b318214ce9dad);
+        
+    
+        var popup_02bb12a184fc459860a06f8474931798 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_c16b9f09dac652040c7464734bf1e703 = $(`<div id="html_c16b9f09dac652040c7464734bf1e703" style="width: 100.0%; height: 100.0%;">     <div style="width: 280px;">         <h4 style="margin-bottom: 8px;">             Velachery Res. Area, Chennai - CPCB         </h4>          <b>Location ID:</b> 5655<br>         <b>Provider:</b> CPCB<br>         <b>Latitude:</b> 13.0052189<br>         <b>Longitude:</b> 80.2398125<br>         <b>Pollutants:</b> co,no,no2,nox,o3,pm10,pm25,relativehumidity,so2,temperature,wind_direction,wind_speed<br>         <b>First measurement:</b> 2018-03-09T11:00:00+05:30<br>         <b>Last measurement:</b> 2026-07-13T20:00:00+05:30     </div>     </div>`)[0];
+                popup_02bb12a184fc459860a06f8474931798.setContent(html_c16b9f09dac652040c7464734bf1e703);
+            
+        
+
+        circle_marker_9089bd823b95fa7679e90e5d236e7e99.bindPopup(popup_02bb12a184fc459860a06f8474931798)
+        ;
+
+        
+    
+    
+            circle_marker_9089bd823b95fa7679e90e5d236e7e99.bindTooltip(
+                `<div>
+                     Velachery Res. Area, Chennai - CPCB — Active candidate station
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_4e1661da2aa36d5c9dae341c36fbfaaa = L.circleMarker(
+                [13.08784, 80.278475],
+                {"bubblingMouseEvents": true, "color": "gray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "gray", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 2}
+            ).addTo(map_e1b9467274ba60ca979b318214ce9dad);
+        
+    
+        var popup_11e919b35ee38d46e664a47764dcb287 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_47c14528163c6bf81b6cbf4025a3681e = $(`<div id="html_47c14528163c6bf81b6cbf4025a3681e" style="width: 100.0%; height: 100.0%;">     <div style="width: 280px;">         <h4 style="margin-bottom: 8px;">             Chennai         </h4>          <b>Location ID:</b> 8558<br>         <b>Provider:</b> AirNow<br>         <b>Latitude:</b> 13.08784<br>         <b>Longitude:</b> 80.278475<br>         <b>Pollutants:</b> pm25<br>         <b>First measurement:</b> 2022-10-04T01:30:00+05:30<br>         <b>Last measurement:</b> 2026-07-13T22:00:00+05:30     </div>     </div>`)[0];
+                popup_11e919b35ee38d46e664a47764dcb287.setContent(html_47c14528163c6bf81b6cbf4025a3681e);
+            
+        
+
+        circle_marker_4e1661da2aa36d5c9dae341c36fbfaaa.bindPopup(popup_11e919b35ee38d46e664a47764dcb287)
+        ;
+
+        
+    
+    
+            circle_marker_4e1661da2aa36d5c9dae341c36fbfaaa.bindTooltip(
+                `<div>
+                     Chennai — Inactive or excluded station
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_53499be038d33e31953794d0d4ea581f = L.circleMarker(
+                [13.1662, 80.2584],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9, "stroke": true, "weight": 2}
+            ).addTo(map_e1b9467274ba60ca979b318214ce9dad);
+        
+    
+        var popup_1f4a7dd799f7fb1d9f0ff2976861f9a4 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_35b50f920f78441c4073a21bb56ef160 = $(`<div id="html_35b50f920f78441c4073a21bb56ef160" style="width: 100.0%; height: 100.0%;">     <div style="width: 280px;">         <h4 style="margin-bottom: 8px;">             Manali Village, Chennai - TNPCB         </h4>          <b>Location ID:</b> 10780<br>         <b>Provider:</b> CPCB<br>         <b>Latitude:</b> 13.1662<br>         <b>Longitude:</b> 80.2584<br>         <b>Pollutants:</b> co,no,no2,nox,o3,pm10,pm25,relativehumidity,so2,temperature,wind_direction,wind_speed<br>         <b>First measurement:</b> 2019-07-19T11:30:00+05:30<br>         <b>Last measurement:</b> 2026-07-13T20:00:00+05:30     </div>     </div>`)[0];
+                popup_1f4a7dd799f7fb1d9f0ff2976861f9a4.setContent(html_35b50f920f78441c4073a21bb56ef160);
+            
+        
+
+        circle_marker_53499be038d33e31953794d0d4ea581f.bindPopup(popup_1f4a7dd799f7fb1d9f0ff2976861f9a4)
+        ;
+
+        
+    
+    
+            circle_marker_53499be038d33e31953794d0d4ea581f.bindTooltip(
+                `<div>
+                     Manali Village, Chennai - TNPCB — Active candidate station
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_b9e8d922eec3d1eaeefffe5529e21648 = L.circleMarker(
+                [13.1036, 80.2909],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9, "stroke": true, "weight": 2}
+            ).addTo(map_e1b9467274ba60ca979b318214ce9dad);
+        
+    
+        var popup_a1ee52da132a70d292a9e03f0a525ffd = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_750abe96a6764168d46422e770cd5a7d = $(`<div id="html_750abe96a6764168d46422e770cd5a7d" style="width: 100.0%; height: 100.0%;">     <div style="width: 280px;">         <h4 style="margin-bottom: 8px;">             Royapuram, Chennai - TNPCB         </h4>          <b>Location ID:</b> 11578<br>         <b>Provider:</b> CPCB<br>         <b>Latitude:</b> 13.1036<br>         <b>Longitude:</b> 80.2909<br>         <b>Pollutants:</b> co,no,no2,nox,o3,pm10,pm25,relativehumidity,so2,temperature,wind_direction,wind_speed<br>         <b>First measurement:</b> 2020-11-08T19:30:00+05:30<br>         <b>Last measurement:</b> 2026-07-13T19:45:00+05:30     </div>     </div>`)[0];
+                popup_a1ee52da132a70d292a9e03f0a525ffd.setContent(html_750abe96a6764168d46422e770cd5a7d);
+            
+        
+
+        circle_marker_b9e8d922eec3d1eaeefffe5529e21648.bindPopup(popup_a1ee52da132a70d292a9e03f0a525ffd)
+        ;
+
+        
+    
+    
+            circle_marker_b9e8d922eec3d1eaeefffe5529e21648.bindTooltip(
+                `<div>
+                     Royapuram, Chennai - TNPCB — Active candidate station
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_908f87ac51dd8b4cfe45595aa7323288 = L.circleMarker(
+                [13.1278, 80.2642],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9, "stroke": true, "weight": 2}
+            ).addTo(map_e1b9467274ba60ca979b318214ce9dad);
+        
+    
+        var popup_6665ae8dafc3ffdde7152e96a9355124 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_f5499c636930e671a8d434b9d0a14701 = $(`<div id="html_f5499c636930e671a8d434b9d0a14701" style="width: 100.0%; height: 100.0%;">     <div style="width: 280px;">         <h4 style="margin-bottom: 8px;">             Kodungaiyur, Chennai - TNPCB         </h4>          <b>Location ID:</b> 11579<br>         <b>Provider:</b> CPCB<br>         <b>Latitude:</b> 13.1278<br>         <b>Longitude:</b> 80.2642<br>         <b>Pollutants:</b> co,no,no2,nox,o3,pm10,pm25,relativehumidity,so2,temperature,wind_direction,wind_speed<br>         <b>First measurement:</b> 2020-11-08T19:30:00+05:30<br>         <b>Last measurement:</b> 2026-07-13T20:00:00+05:30     </div>     </div>`)[0];
+                popup_6665ae8dafc3ffdde7152e96a9355124.setContent(html_f5499c636930e671a8d434b9d0a14701);
+            
+        
+
+        circle_marker_908f87ac51dd8b4cfe45595aa7323288.bindPopup(popup_6665ae8dafc3ffdde7152e96a9355124)
+        ;
+
+        
+    
+    
+            circle_marker_908f87ac51dd8b4cfe45595aa7323288.bindTooltip(
+                `<div>
+                     Kodungaiyur, Chennai - TNPCB — Active candidate station
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_08a203b763014056a2c233515d4722ab = L.circleMarker(
+                [13.0664, 80.2112],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9, "stroke": true, "weight": 2}
+            ).addTo(map_e1b9467274ba60ca979b318214ce9dad);
+        
+    
+        var popup_3dad28c8ff13f860284e3a941ee8681e = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_33f17a644b93e8776c3bf3b8d6137022 = $(`<div id="html_33f17a644b93e8776c3bf3b8d6137022" style="width: 100.0%; height: 100.0%;">     <div style="width: 280px;">         <h4 style="margin-bottom: 8px;">             Arumbakkam, Chennai - TNPCB         </h4>          <b>Location ID:</b> 11581<br>         <b>Provider:</b> CPCB<br>         <b>Latitude:</b> 13.0664<br>         <b>Longitude:</b> 80.2112<br>         <b>Pollutants:</b> no,no2,nox,pm10,pm25,relativehumidity,so2,temperature,wind_direction,wind_speed<br>         <b>First measurement:</b> 2020-11-08T17:30:00+05:30<br>         <b>Last measurement:</b> 2026-07-13T20:00:00+05:30     </div>     </div>`)[0];
+                popup_3dad28c8ff13f860284e3a941ee8681e.setContent(html_33f17a644b93e8776c3bf3b8d6137022);
+            
+        
+
+        circle_marker_08a203b763014056a2c233515d4722ab.bindPopup(popup_3dad28c8ff13f860284e3a941ee8681e)
+        ;
+
+        
+    
+    
+            circle_marker_08a203b763014056a2c233515d4722ab.bindTooltip(
+                `<div>
+                     Arumbakkam, Chennai - TNPCB — Active candidate station
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_9eb706b699e1beffea4dc9671e516b4a = L.circleMarker(
+                [12.9533, 80.2357],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9, "stroke": true, "weight": 2}
+            ).addTo(map_e1b9467274ba60ca979b318214ce9dad);
+        
+    
+        var popup_e12b423b5bf0a3c55666b6c18f417a84 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_93cc31e0604b8c530ad5c6d4225d2feb = $(`<div id="html_93cc31e0604b8c530ad5c6d4225d2feb" style="width: 100.0%; height: 100.0%;">     <div style="width: 280px;">         <h4 style="margin-bottom: 8px;">             Perungudi, Chennai - TNPCB         </h4>          <b>Location ID:</b> 12046<br>         <b>Provider:</b> CPCB<br>         <b>Latitude:</b> 12.9533<br>         <b>Longitude:</b> 80.2357<br>         <b>Pollutants:</b> co,no,no2,nox,o3,pm10,pm25,relativehumidity,so2,temperature,wind_direction,wind_speed<br>         <b>First measurement:</b> 2025-02-19T01:45:00+05:30<br>         <b>Last measurement:</b> 2026-07-13T19:45:00+05:30     </div>     </div>`)[0];
+                popup_e12b423b5bf0a3c55666b6c18f417a84.setContent(html_93cc31e0604b8c530ad5c6d4225d2feb);
+            
+        
+
+        circle_marker_9eb706b699e1beffea4dc9671e516b4a.bindPopup(popup_e12b423b5bf0a3c55666b6c18f417a84)
+        ;
+
+        
+    
+    
+            circle_marker_9eb706b699e1beffea4dc9671e516b4a.bindTooltip(
+                `<div>
+                     Perungudi, Chennai - TNPCB — Active candidate station
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+</script>
+</html>
