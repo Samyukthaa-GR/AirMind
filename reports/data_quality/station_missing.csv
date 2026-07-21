@@ -1,0 +1,7 @@
+station_name,rows,pm25,pm10,temperature,relativehumidity,wind_direction,wind_speed
+"Arumbakkam, Chennai - TNPCB",8736,36.94,33.28,32.28,32.36,48.28,33.41
+"Manali Village, Chennai - TNPCB",8736,10.5,10.49,10.49,10.49,10.49,10.49
+"Manali, Chennai - CPCB",8736,16.06,16.53,15.96,16.12,15.96,15.96
+"Perungudi, Chennai - TNPCB",8736,10.58,10.41,10.3,20.27,20.3,14.66
+"Royapuram, Chennai - TNPCB",8736,23.89,23.02,22.37,22.37,22.37,22.37
+"Velachery Res. Area, Chennai - CPCB",8736,18.36,18.37,18.36,21.58,18.36,18.37

@@ -1,0 +1,93 @@
+{
+    "model": "XGBoost",
+    "forecast_horizon_hours": 1,
+    "target": "pm25_next_hour",
+    "train_rows": 29051,
+    "validation_rows": 6198,
+    "test_rows": 7000,
+    "validation": {
+        "mae": 23.1527,
+        "rmse": 93.3113,
+        "r2": 0.3618
+    },
+    "test_all_rows": {
+        "mae": 14.3943,
+        "rmse": 38.9728,
+        "r2": 0.3512
+    },
+    "common_test_rows": 6830,
+    "xgboost_common_test": {
+        "mae": 14.2499,
+        "rmse": 38.9901,
+        "r2": 0.3572
+    },
+    "persistence_baseline_test": {
+        "mae": 11.2726,
+        "rmse": 42.1439,
+        "r2": 0.249
+    },
+    "hybrid_test": {
+        "mae": 11.2726,
+        "rmse": 42.1439,
+        "r2": 0.249,
+        "xgboost_weight": 0.0,
+        "persistence_weight": 1.0
+    },
+    "blend_validation_search": [
+        {
+            "xgboost_weight": 0.0,
+            "persistence_weight": 1.0,
+            "validation_mae": 12.1883
+        },
+        {
+            "xgboost_weight": 0.1,
+            "persistence_weight": 0.9,
+            "validation_mae": 12.705
+        },
+        {
+            "xgboost_weight": 0.2,
+            "persistence_weight": 0.8,
+            "validation_mae": 13.4822
+        },
+        {
+            "xgboost_weight": 0.3,
+            "persistence_weight": 0.7,
+            "validation_mae": 14.3983
+        },
+        {
+            "xgboost_weight": 0.4,
+            "persistence_weight": 0.6,
+            "validation_mae": 15.4164
+        },
+        {
+            "xgboost_weight": 0.5,
+            "persistence_weight": 0.5,
+            "validation_mae": 16.5019
+        },
+        {
+            "xgboost_weight": 0.6,
+            "persistence_weight": 0.4,
+            "validation_mae": 17.6416
+        },
+        {
+            "xgboost_weight": 0.7,
+            "persistence_weight": 0.3,
+            "validation_mae": 18.8564
+        },
+        {
+            "xgboost_weight": 0.8,
+            "persistence_weight": 0.2,
+            "validation_mae": 20.1581
+        },
+        {
+            "xgboost_weight": 0.9,
+            "persistence_weight": 0.1,
+            "validation_mae": 21.5418
+        },
+        {
+            "xgboost_weight": 1.0,
+            "persistence_weight": 0.0,
+            "validation_mae": 23.0179
+        }
+    ]
+}
