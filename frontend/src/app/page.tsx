@@ -1,7 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
-
+import { motion } from "framer-motion";
 import DashboardShell from "@/components/layout/DashboardShell";
 import HeroSection from "@/components/landing/HeroSection";
 import ProblemSection from "@/components/landing/ProblemSection";
@@ -339,17 +339,23 @@ export default function Home() {
   <div className="relative p-6 sm:p-8 lg:p-10">
     <div className="flex flex-col gap-6 border-b border-white/10 pb-7 lg:flex-row lg:items-start lg:justify-between">
       <div>
-        <div className="inline-flex items-center gap-2 rounded-full border border-[#69B4FF]/25 bg-[#4DA3FF]/10 px-3.5 py-2">
-          <span className="relative flex h-2 w-2">
-            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#69B4FF] opacity-50" />
+        <motion.div
+  initial={{ opacity: 0, y: 8 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true, amount: 0.6 }}
+  transition={{ duration: 0.4 }}
+  className="inline-flex items-center gap-2 rounded-full border border-[#69B4FF]/25 bg-[#4DA3FF]/10 px-3.5 py-2"
+>
+  <span className="relative flex h-2 w-2">
+    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#69B4FF] opacity-50" />
 
-            <span className="relative inline-flex h-2 w-2 rounded-full bg-[#69B4FF]" />
-          </span>
+    <span className="relative inline-flex h-2 w-2 rounded-full bg-[#69B4FF]" />
+  </span>
 
-          <span className="text-[10px] font-semibold uppercase tracking-[0.16em] text-[#A9D6FF]">
-            AI-generated decision brief
-          </span>
-        </div>
+  <span className="text-[10px] font-semibold uppercase tracking-[0.16em] text-[#A9D6FF]">
+    AI-generated decision brief
+  </span>
+</motion.div>
 
         <h2 className="mt-5 text-2xl font-semibold tracking-[-0.035em] text-white sm:text-3xl">
           Next-hour air-quality intelligence
@@ -383,9 +389,18 @@ export default function Home() {
           Predicted highest-risk monitoring location
         </p>
 
-        <h3 className="mt-2 max-w-3xl text-4xl font-semibold leading-tight tracking-[-0.055em] text-white sm:text-5xl">
-          {summary.top_hotspot.station_name}
-        </h3>
+        <motion.h3
+  initial={{ opacity: 0, y: 14 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true, amount: 0.6 }}
+  transition={{
+    duration: 0.5,
+    delay: 0.2,
+  }}
+  className="mt-2 max-w-3xl text-4xl font-semibold leading-tight tracking-[-0.055em] text-white sm:text-5xl"
+>
+  {summary.top_hotspot.station_name}
+</motion.h3>
 
         <div className="mt-7 flex flex-wrap items-end gap-x-8 gap-y-5">
           <div>
@@ -394,9 +409,18 @@ export default function Home() {
             </p>
 
             <div className="mt-2 flex items-end gap-3">
-              <p className="machine-text text-5xl font-semibold tracking-[-0.06em] text-white sm:text-6xl">
-                {summary.top_hotspot.forecast_pm25.toFixed(1)}
-              </p>
+              <motion.p
+  initial={{ opacity: 0, y: 12, scale: 0.98 }}
+  whileInView={{ opacity: 1, y: 0, scale: 1 }}
+  viewport={{ once: true, amount: 0.6 }}
+  transition={{
+    duration: 0.5,
+    delay: 0.32,
+  }}
+  className="machine-text text-5xl font-semibold tracking-[-0.06em] text-white sm:text-6xl"
+>
+  {summary.top_hotspot.forecast_pm25.toFixed(1)}
+</motion.p>
 
               <p className="machine-text pb-1.5 text-sm text-[#A9BED2]">
                 µg/m³
