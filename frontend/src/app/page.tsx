@@ -45,6 +45,7 @@ export default function Home() {
   function scrollToDashboard() {
     document.getElementById("dashboard")?.scrollIntoView({
       behavior: "smooth",
+      block: "start",
     });
   }
 
@@ -115,7 +116,12 @@ export default function Home() {
 
       <ProblemSection />
 
-      <div id="dashboard" className="scroll-mt-6 pt-10">
+      <div
+        id="dashboard"
+        className="scroll-mt-6 pt-10"
+      >
+        {/* Dashboard heading */}
+
         <section className="mb-6">
           <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
             <div>
@@ -128,9 +134,9 @@ export default function Home() {
               </h1>
 
               <p className="mt-3 max-w-2xl text-sm leading-6 text-[var(--text-secondary)]">
-                Explore historical pollution patterns, compare
-                monitoring locations, and identify the city&apos;s
-                highest-priority PM2.5 hotspots.
+                Explore historical pollution patterns, compare monitoring
+                locations, and identify the city&apos;s highest-priority PM2.5
+                hotspots.
               </p>
             </div>
 
@@ -140,6 +146,8 @@ export default function Home() {
             </div>
           </div>
         </section>
+
+        {/* Status strip */}
 
         <section className="surface-panel mb-5 overflow-hidden">
           <div className="grid divide-y divide-[var(--border)] sm:grid-cols-2 sm:divide-x sm:divide-y-0 xl:grid-cols-5">
@@ -170,7 +178,12 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="surface-panel mb-5 p-5 sm:p-6">
+        {/* Temporal replay target */}
+
+        <section
+          id="temporal-replay"
+          className="surface-panel mb-5 scroll-mt-8 p-5 sm:p-6"
+        >
           <div className="flex flex-col gap-6 xl:flex-row xl:items-center xl:justify-between">
             <div>
               <div className="flex flex-wrap items-center gap-3">
@@ -262,6 +275,8 @@ export default function Home() {
           </div>
         </section>
 
+        {/* Network summary */}
+
         <section className="mb-5">
           <div className="mb-3 flex items-center justify-between">
             <div>
@@ -311,7 +326,12 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="mb-5 overflow-hidden rounded-2xl border border-[#cde4f7] bg-[linear-gradient(110deg,#eef8ff_0%,#ffffff_55%,#f4faff_100%)] shadow-[var(--shadow-sm)]">
+        {/* Forecast intelligence target */}
+
+        <section
+          id="forecast-intelligence"
+          className="mb-5 scroll-mt-8 overflow-hidden rounded-2xl border border-[#cde4f7] bg-[linear-gradient(110deg,#eef8ff_0%,#ffffff_55%,#f4faff_100%)] shadow-[var(--shadow-sm)]"
+        >
           <div className="flex">
             <div className="w-1.5 shrink-0 bg-[var(--primary)]" />
 
@@ -328,8 +348,8 @@ export default function Home() {
                 <span className="font-semibold text-[var(--text-primary)]">
                   {summary.top_hotspot.station_name}
                 </span>{" "}
-                is predicted to be Chennai&apos;s highest PM2.5
-                hotspot during the next hour, reaching{" "}
+                is predicted to be Chennai&apos;s highest PM2.5 hotspot during
+                the next hour, reaching{" "}
                 <span className="machine-text font-semibold text-[var(--primary-hover)]">
                   {summary.top_hotspot.forecast_pm25.toFixed(
                     1,
@@ -350,6 +370,8 @@ export default function Home() {
           </div>
         </section>
 
+        {/* Map and hotspot ranking */}
+
         <section className="grid gap-5 xl:grid-cols-[minmax(0,1.7fr)_minmax(330px,0.72fr)]">
           <div className="surface-panel min-h-130 overflow-hidden p-5 sm:p-6">
             <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
@@ -363,8 +385,8 @@ export default function Home() {
                 </h2>
 
                 <p className="mt-2 text-sm text-[var(--text-secondary)]">
-                  Geographic distribution of forecasted
-                  station-level PM2.5 conditions.
+                  Geographic distribution of forecasted station-level PM2.5
+                  conditions.
                 </p>
               </div>
 
@@ -378,7 +400,12 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="surface-panel min-h-130 p-5 sm:p-6">
+          {/* Hotspot priority target */}
+
+          <div
+            id="hotspot-priority"
+            className="surface-panel min-h-130 scroll-mt-8 p-5 sm:p-6"
+          >
             <div>
               <p className="section-label">
                 05 / Hotspot priority
@@ -389,8 +416,7 @@ export default function Home() {
               </h2>
 
               <p className="mt-2 text-sm text-[var(--text-secondary)]">
-                Ranked by predicted next-hour PM2.5
-                concentration.
+                Ranked by predicted next-hour PM2.5 concentration.
               </p>
             </div>
 

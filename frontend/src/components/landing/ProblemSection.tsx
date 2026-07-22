@@ -8,30 +8,49 @@ import {
   Wind,
 } from "lucide-react";
 
+const cards = [
+  {
+    icon: Wind,
+    iconClassName: "text-sky-600",
+    iconBackgroundClassName: "bg-sky-50",
+    title: "Air pollution is highly dynamic",
+    text: "PM2.5 levels can change significantly within hours due to traffic, weather, and localized emissions, making static reports insufficient.",
+    actionLabel: "Explore temporal replay",
+    targetId: "temporal-replay",
+  },
+  {
+    icon: Clock3,
+    iconClassName: "text-amber-600",
+    iconBackgroundClassName: "bg-amber-50",
+    title: "Current systems are reactive",
+    text: "Most AQI platforms report current conditions only after pollution has already occurred, limiting the time available for intervention.",
+    actionLabel: "View forecast intelligence",
+    targetId: "forecast-intelligence",
+  },
+  {
+    icon: AlertTriangle,
+    iconClassName: "text-rose-600",
+    iconBackgroundClassName: "bg-rose-50",
+    title: "Decision support remains limited",
+    text: "Authorities need more than measurements. They need forecasts, hotspot identification, and actionable insights to respond proactively.",
+    actionLabel: "See hotspot priorities",
+    targetId: "hotspot-priority",
+  },
+];
+
 export default function ProblemSection() {
-  const cards = [
-    {
-      icon: Wind,
-      iconClassName: "text-sky-600",
-      iconBackgroundClassName: "bg-sky-50",
-      title: "Air pollution is highly dynamic",
-      text: "PM2.5 levels can change significantly within hours due to traffic, weather, and localized emissions, making static reports insufficient.",
-    },
-    {
-      icon: Clock3,
-      iconClassName: "text-amber-600",
-      iconBackgroundClassName: "bg-amber-50",
-      title: "Current systems are reactive",
-      text: "Most AQI platforms report current conditions only after pollution has already occurred, limiting the time available for intervention.",
-    },
-    {
-      icon: AlertTriangle,
-      iconClassName: "text-rose-600",
-      iconBackgroundClassName: "bg-rose-50",
-      title: "Decision support remains limited",
-      text: "Authorities need more than measurements. They need forecasts, hotspot identification, and actionable insights to respond proactively.",
-    },
-  ];
+  function scrollToSection(targetId: string) {
+    const target = document.getElementById(targetId);
+
+    if (!target) {
+      return;
+    }
+
+    target.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  }
 
   return (
     <section className="py-24">
@@ -77,7 +96,7 @@ export default function ProblemSection() {
                 delay: index * 0.1,
                 duration: 0.5,
               }}
-              className="group rounded-[24px] border border-[var(--border)] bg-white p-7 shadow-[var(--shadow-sm)] transition duration-200 hover:-translate-y-1 hover:border-[var(--border-strong)] hover:shadow-[var(--shadow-md)]"
+              className="group flex min-h-full flex-col rounded-[24px] border border-[var(--border)] bg-white p-7 shadow-[var(--shadow-sm)] transition duration-200 hover:-translate-y-1 hover:border-[var(--border-strong)] hover:shadow-[var(--shadow-md)]"
             >
               <div
                 className={`flex h-12 w-12 items-center justify-center rounded-2xl ${card.iconBackgroundClassName}`}
@@ -96,10 +115,19 @@ export default function ProblemSection() {
                 {card.text}
               </p>
 
-              <div className="mt-7 flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.12em] text-[var(--primary-hover)]">
-                Operational challenge
-                <ArrowRight className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-1" />
-              </div>
+              <button
+                type="button"
+                onClick={() => scrollToSection(card.targetId)}
+                className="mt-auto inline-flex w-fit items-center gap-2 pt-7 text-left text-xs font-semibold uppercase tracking-[0.12em] text-[var(--primary-hover)] transition duration-200 hover:gap-3 hover:text-[var(--primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)] focus-visible:ring-offset-4"
+                aria-label={`${card.actionLabel}: ${card.title}`}
+              >
+                {card.actionLabel}
+
+                <ArrowRight
+                  className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-1"
+                  aria-hidden="true"
+                />
+              </button>
             </motion.article>
           );
         })}
