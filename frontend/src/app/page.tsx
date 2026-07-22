@@ -329,46 +329,201 @@ export default function Home() {
         {/* Forecast intelligence target */}
 
         <section
-          id="forecast-intelligence"
-          className="mb-5 scroll-mt-8 overflow-hidden rounded-2xl border border-[#cde4f7] bg-[linear-gradient(110deg,#eef8ff_0%,#ffffff_55%,#f4faff_100%)] shadow-[var(--shadow-sm)]"
-        >
-          <div className="flex">
-            <div className="w-1.5 shrink-0 bg-[var(--primary)]" />
+  id="forecast-intelligence"
+  className="relative mb-5 scroll-mt-8 overflow-hidden rounded-[28px] border border-[#254767] bg-[#102A43] shadow-[0_24px_60px_rgba(15,42,67,0.22)]"
+>
+  <div className="pointer-events-none absolute -right-28 -top-28 h-80 w-80 rounded-full bg-[#2D8DFF]/20 blur-[90px]" />
 
-            <div className="p-6 sm:p-7">
-              <p className="section-label text-[var(--primary)]">
-                03 / AirMind intelligence
+  <div className="pointer-events-none absolute -bottom-36 left-1/3 h-72 w-72 rounded-full bg-[#4DA3FF]/10 blur-[100px]" />
+
+  <div className="relative p-6 sm:p-8 lg:p-10">
+    <div className="flex flex-col gap-6 border-b border-white/10 pb-7 lg:flex-row lg:items-start lg:justify-between">
+      <div>
+        <div className="inline-flex items-center gap-2 rounded-full border border-[#69B4FF]/25 bg-[#4DA3FF]/10 px-3.5 py-2">
+          <span className="relative flex h-2 w-2">
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#69B4FF] opacity-50" />
+
+            <span className="relative inline-flex h-2 w-2 rounded-full bg-[#69B4FF]" />
+          </span>
+
+          <span className="text-[10px] font-semibold uppercase tracking-[0.16em] text-[#A9D6FF]">
+            AI-generated decision brief
+          </span>
+        </div>
+
+        <h2 className="mt-5 text-2xl font-semibold tracking-[-0.035em] text-white sm:text-3xl">
+          Next-hour air-quality intelligence
+        </h2>
+
+        <p className="mt-3 max-w-2xl text-sm leading-7 text-[#B8CCE0] sm:text-[15px]">
+          AirMind has analysed the current replay frame, station-level
+          forecasts, and network-wide pollution trends to identify the
+          most important operational signal.
+        </p>
+      </div>
+
+      <div className="shrink-0 rounded-2xl border border-white/10 bg-white/[0.06] px-4 py-3 backdrop-blur-sm">
+        <p className="text-[9px] font-semibold uppercase tracking-[0.14em] text-[#8EABC5]">
+          Forecast generated for
+        </p>
+
+        <p className="machine-text mt-1.5 text-xs font-medium text-white">
+          {formatForecastTime(summary.forecast_for_utc)}
+        </p>
+      </div>
+    </div>
+
+    <div className="grid gap-8 py-8 lg:grid-cols-[minmax(0,1.35fr)_minmax(250px,0.65fr)] lg:items-stretch">
+      <div>
+        <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-[#7FBFFF]">
+          Primary forecast result
+        </p>
+
+        <p className="mt-4 text-sm font-medium text-[#AFC5D9]">
+          Predicted highest-risk monitoring location
+        </p>
+
+        <h3 className="mt-2 max-w-3xl text-4xl font-semibold leading-tight tracking-[-0.055em] text-white sm:text-5xl">
+          {summary.top_hotspot.station_name}
+        </h3>
+
+        <div className="mt-7 flex flex-wrap items-end gap-x-8 gap-y-5">
+          <div>
+            <p className="text-[10px] font-semibold uppercase tracking-[0.14em] text-[#8EABC5]">
+              Forecast PM2.5
+            </p>
+
+            <div className="mt-2 flex items-end gap-3">
+              <p className="machine-text text-5xl font-semibold tracking-[-0.06em] text-white sm:text-6xl">
+                {summary.top_hotspot.forecast_pm25.toFixed(1)}
               </p>
 
-              <h2 className="mt-2 text-lg font-semibold text-[var(--text-primary)]">
-                Automated network interpretation
-              </h2>
-
-              <p className="mt-3 max-w-6xl text-sm leading-7 text-[var(--text-secondary)] sm:text-[15px]">
-                <span className="font-semibold text-[var(--text-primary)]">
-                  {summary.top_hotspot.station_name}
-                </span>{" "}
-                is predicted to be Chennai&apos;s highest PM2.5 hotspot during
-                the next hour, reaching{" "}
-                <span className="machine-text font-semibold text-[var(--primary-hover)]">
-                  {summary.top_hotspot.forecast_pm25.toFixed(
-                    1,
-                  )}{" "}
-                  µg/m³
-                </span>
-                . Pollution is rising across{" "}
-                <span className="machine-text font-semibold text-[var(--text-primary)]">
-                  {summary.rising_stations}
-                </span>{" "}
-                monitored stations, while{" "}
-                <span className="machine-text font-semibold text-[var(--text-primary)]">
-                  {summary.improving_stations}
-                </span>{" "}
-                stations are showing improving conditions.
+              <p className="machine-text pb-1.5 text-sm text-[#A9BED2]">
+                µg/m³
               </p>
             </div>
           </div>
-        </section>
+
+          <div className="pb-1">
+            <p className="text-[10px] font-semibold uppercase tracking-[0.14em] text-[#8EABC5]">
+              Operational priority
+            </p>
+
+            <div
+              className={`mt-2 inline-flex items-center gap-2 rounded-full border px-3.5 py-2 text-xs font-semibold uppercase tracking-[0.1em] ${getPriorityBadgeClass(
+                summary.top_hotspot.forecast_pm25,
+              )}`}
+            >
+              <span className="h-2 w-2 rounded-full bg-current" />
+
+              {getPriorityLabel(
+                summary.top_hotspot.forecast_pm25,
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="flex flex-col justify-between rounded-[22px] border border-white/10 bg-white/[0.055] p-5 backdrop-blur-sm sm:p-6">
+        <div>
+          <p className="text-[10px] font-semibold uppercase tracking-[0.14em] text-[#8EABC5]">
+            Network movement
+          </p>
+
+          <div className="mt-5 grid grid-cols-2 gap-3">
+            <DecisionMetric
+              label="Rising"
+              value={summary.rising_stations.toString()}
+              note="stations"
+            />
+
+            <DecisionMetric
+              label="Improving"
+              value={summary.improving_stations.toString()}
+              note="stations"
+            />
+          </div>
+        </div>
+
+        <div className="mt-6 border-t border-white/10 pt-5">
+          <p className="text-[10px] font-semibold uppercase tracking-[0.14em] text-[#8EABC5]">
+            Network average
+          </p>
+
+          <div className="mt-2 flex items-end gap-2">
+            <p className="machine-text text-2xl font-semibold text-white">
+              {summary.average_forecast.toFixed(1)}
+            </p>
+
+            <p className="machine-text pb-0.5 text-[10px] uppercase tracking-[0.08em] text-[#91AAC1]">
+              µg/m³
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div className="border-t border-white/10 pt-7">
+      <div className="flex flex-col gap-5 lg:flex-row lg:items-start lg:justify-between">
+        <div className="max-w-3xl">
+          <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-[#7FBFFF]">
+            Automated interpretation
+          </p>
+
+          <p className="mt-3 text-sm leading-7 text-[#C1D1E0] sm:text-[15px]">
+            <span className="font-semibold text-white">
+              {summary.top_hotspot.station_name}
+            </span>{" "}
+            is forecast to record the highest PM2.5 concentration in
+            Chennai during the next hour. The predicted peak of{" "}
+            <span className="machine-text font-semibold text-[#8DCBFF]">
+              {summary.top_hotspot.forecast_pm25.toFixed(1)} µg/m³
+            </span>{" "}
+            is above the network average of{" "}
+            <span className="machine-text font-semibold text-white">
+              {summary.average_forecast.toFixed(1)} µg/m³
+            </span>
+            , making it the first location that should be reviewed by
+            decision-makers.
+          </p>
+        </div>
+
+        <a
+          href="#hotspot-priority"
+className="group inline-flex shrink-0 items-center gap-2 rounded-xl border border-[#69B4FF]/30 bg-[#4DA3FF]/10 px-4 py-3 text-xs font-semibold !text-white transition duration-200 hover:border-[#69B4FF]/60 hover:bg-[#4DA3FF]/20 hover:text-white"        >
+          Review priority locations
+
+          <span
+            aria-hidden="true"
+            className="transition-transform duration-200 group-hover:translate-x-1"
+          >
+            →
+          </span>
+        </a>
+      </div>
+
+      <div className="mt-6 grid gap-3 md:grid-cols-3">
+        <DecisionInsight
+          number="01"
+          title="Peak location identified"
+          text={`${summary.top_hotspot.station_name} currently leads the next-hour station ranking.`}
+        />
+
+        <DecisionInsight
+          number="02"
+          title="Network trend assessed"
+          text={`${summary.rising_stations} stations are rising while ${summary.improving_stations} are improving.`}
+        />
+
+        <DecisionInsight
+          number="03"
+          title="Response priority established"
+          text="Review the highest-ranked stations first and compare their geographic distribution on the map."
+        />
+      </div>
+    </div>
+  </div>
+</section>
 
         {/* Map and hotspot ranking */}
 
@@ -569,7 +724,106 @@ function MetricCard({
     </article>
   );
 }
+type DecisionMetricProps = {
+  label: string;
+  value: string;
+  note: string;
+};
 
+function DecisionMetric({
+  label,
+  value,
+  note,
+}: DecisionMetricProps) {
+  return (
+    <div className="rounded-xl border border-white/10 bg-white/[0.055] p-4">
+      <p className="text-[9px] font-semibold uppercase tracking-[0.13em] text-[#8EABC5]">
+        {label}
+      </p>
+
+      <p className="machine-text mt-2 text-2xl font-semibold text-white">
+        {value}
+      </p>
+
+      <p className="mt-1 text-[10px] text-[#8EABC5]">
+        {note}
+      </p>
+    </div>
+  );
+}
+
+type DecisionInsightProps = {
+  number: string;
+  title: string;
+  text: string;
+};
+
+function DecisionInsight({
+  number,
+  title,
+  text,
+}: DecisionInsightProps) {
+  return (
+    <article className="rounded-2xl border border-white/10 bg-white/[0.045] p-5 transition duration-200 hover:border-[#69B4FF]/25 hover:bg-white/[0.07]">
+      <div className="machine-text flex h-8 w-8 items-center justify-center rounded-lg border border-[#69B4FF]/20 bg-[#4DA3FF]/10 text-[10px] font-semibold text-[#89C9FF]">
+        {number}
+      </div>
+
+      <h3 className="mt-4 text-sm font-semibold text-white">
+        {title}
+      </h3>
+
+      <p className="mt-2 text-xs leading-6 text-[#9FB6CB]">
+        {text}
+      </p>
+    </article>
+  );
+}
+function getPriorityLabel(forecastPm25: number) {
+  if (forecastPm25 >= 90) {
+    return "Critical priority";
+  }
+
+  if (forecastPm25 >= 60) {
+    return "High priority";
+  }
+
+  if (forecastPm25 >= 30) {
+    return "Elevated priority";
+  }
+
+  return "Routine priority";
+}
+
+function getPriorityBadgeClass(forecastPm25: number) {
+  if (forecastPm25 >= 90) {
+    return "border-[#FF9A9A]/35 bg-[#FF6B6B]/10 text-[#FFB0B0]";
+  }
+
+  if (forecastPm25 >= 60) {
+    return "border-[#FFBB7A]/35 bg-[#F59E57]/10 text-[#FFC48D]";
+  }
+
+  if (forecastPm25 >= 30) {
+    return "border-[#F3D47A]/30 bg-[#DDB74D]/10 text-[#F4D982]";
+  }
+
+  return "border-[#84D7B5]/30 bg-[#54B990]/10 text-[#9DE2C5]";
+}
+
+function formatForecastTime(value: string) {
+  const parsedDate = new Date(value);
+
+  if (Number.isNaN(parsedDate.getTime())) {
+    return "Next available hour";
+  }
+
+  return new Intl.DateTimeFormat("en-IN", {
+    dateStyle: "medium",
+    timeStyle: "short",
+    timeZone: "UTC",
+  }).format(parsedDate);
+}
 function getCategoryDotClass(category: string) {
   const normalizedCategory = category.toLowerCase();
 
