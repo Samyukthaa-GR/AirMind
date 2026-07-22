@@ -3,8 +3,9 @@
 import { motion } from "framer-motion";
 import {
   ArrowDown,
-  BrainCircuit,
+  Check,
   MapPinned,
+  Radio,
   Wind,
 } from "lucide-react";
 
@@ -16,144 +17,110 @@ export default function HeroSection({
   onLaunch,
 }: HeroSectionProps) {
   return (
-    <section className="relative flex min-h-[88vh] items-center overflow-hidden rounded-[32px] border border-white/10 bg-slate-950/80 px-6 py-16 shadow-2xl shadow-black/30 sm:px-10 lg:px-16">
+    <section className="relative overflow-hidden rounded-[28px] border border-[var(--border)] bg-white px-6 py-14 shadow-[var(--shadow-md)] sm:px-10 lg:px-14 lg:py-16">
       <div className="pointer-events-none absolute inset-0">
-        <div className="absolute left-[8%] top-[10%] h-72 w-72 rounded-full bg-sky-500/10 blur-[110px]" />
-        <div className="absolute bottom-[5%] right-[8%] h-80 w-80 rounded-full bg-cyan-400/10 blur-[130px]" />
-
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(148,163,184,0.035)_1px,transparent_1px),linear-gradient(90deg,rgba(148,163,184,0.035)_1px,transparent_1px)] bg-[size:48px_48px]" />
+        <div className="absolute -right-28 -top-28 h-80 w-80 rounded-full bg-[var(--primary-soft)] blur-[100px]" />
+        <div className="absolute -bottom-32 left-[18%] h-72 w-72 rounded-full bg-[#eef8ff] blur-[110px]" />
       </div>
 
-      <div className="relative grid w-full items-center gap-14 xl:grid-cols-[1.1fr_0.9fr]">
+      <div className="relative grid items-center gap-12 xl:grid-cols-[1.1fr_0.9fr] xl:gap-16">
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
+          initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
+          transition={{ duration: 0.55 }}
         >
-          <div className="inline-flex items-center gap-2 rounded-full border border-sky-400/20 bg-sky-400/10 px-4 py-2 text-xs font-semibold text-sky-300">
-            <BrainCircuit className="h-4 w-4" />
-            AI-powered urban air intelligence
+          <div className="inline-flex items-center gap-2 rounded-full border border-[var(--border)] bg-[var(--surface-blue)] px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-[var(--primary-hover)]">
+            <Wind className="h-3.5 w-3.5" />
+            Air quality intelligence platform
           </div>
 
-          <h1 className="mt-7 max-w-4xl text-5xl font-bold leading-[1.02] tracking-[-0.055em] text-white sm:text-6xl lg:text-7xl">
-            Predicting pollution before cities have to breathe it.
-          </h1>
-
-          <p className="mt-7 max-w-2xl text-base leading-8 text-slate-400 sm:text-lg">
-            AirMind transforms fragmented air-quality readings into
-            next-hour PM2.5 forecasts, hotspot intelligence, risk alerts,
-            and actionable recommendations for Chennai.
+          <p className="mt-8 text-sm font-semibold uppercase tracking-[0.16em] text-[var(--text-muted)]">
+            AirMind
           </p>
 
-          <div className="mt-9 flex flex-wrap gap-4">
+          <h1 className="mt-3 max-w-4xl text-5xl font-semibold leading-[1.04] tracking-[-0.045em] text-[var(--text-primary)] sm:text-6xl lg:text-7xl">
+            Air quality intelligence
+            <span className="block font-normal text-[var(--text-secondary)]">
+              for smarter urban decisions.
+            </span>
+          </h1>
+
+          <p className="mt-7 max-w-2xl text-base leading-8 text-[var(--text-secondary)] sm:text-lg">
+            AirMind combines environmental monitoring, machine learning, and
+            geospatial analytics to forecast PM2.5 concentrations, identify
+            emerging pollution hotspots, and support data-driven decisions for
+            Chennai&apos;s urban air quality management.
+          </p>
+
+          <div className="mt-9">
             <button
               type="button"
               onClick={onLaunch}
-              className="group inline-flex items-center gap-3 rounded-2xl bg-sky-400 px-6 py-3.5 text-sm font-bold text-slate-950 shadow-lg shadow-sky-500/20 transition hover:-translate-y-0.5 hover:bg-sky-300"
+              className="group inline-flex items-center gap-3 rounded-2xl bg-[var(--primary)] px-6 py-3.5 text-sm font-semibold text-white shadow-[var(--shadow-sm)] transition duration-200 hover:-translate-y-0.5 hover:bg-[var(--primary-hover)]"
             >
-              Launch intelligence platform
-              <ArrowDown className="h-4 w-4 transition group-hover:translate-y-0.5" />
+              Open Platform
+              <ArrowDown className="h-4 w-4 transition-transform duration-200 group-hover:translate-y-0.5" />
             </button>
-
-            <div className="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-5 py-3.5 text-sm text-slate-300">
-              <span className="relative flex h-2.5 w-2.5">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-60" />
-                <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-400" />
-              </span>
-              Live Chennai monitoring network
-            </div>
           </div>
 
-          <div className="mt-12 grid max-w-2xl gap-3 sm:grid-cols-3">
-            <FeatureBadge
-              icon={<Wind className="h-5 w-5" />}
-              label="Next-hour forecasting"
-            />
-
-            <FeatureBadge
-              icon={<MapPinned className="h-5 w-5" />}
-              label="Hotspot intelligence"
-            />
-
-            <FeatureBadge
-              icon={<BrainCircuit className="h-5 w-5" />}
-              label="Decision support"
-            />
+          <div className="mt-10 grid gap-3 sm:grid-cols-2">
+            <CapabilityItem label="6 monitoring stations" />
+            <CapabilityItem label="XGBoost forecasting" />
+            <CapabilityItem label="Historical replay" />
+            <CapabilityItem label="Next-hour prediction" />
           </div>
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, scale: 0.94 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.75, delay: 0.15 }}
-          className="relative mx-auto w-full max-w-xl"
+          initial={{ opacity: 0, y: 18 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.55, delay: 0.12 }}
+          className="mx-auto w-full max-w-xl"
         >
-          <div className="rounded-[30px] border border-white/10 bg-slate-900/75 p-5 shadow-2xl shadow-black/40 backdrop-blur-xl">
-            <div className="flex items-center justify-between border-b border-white/10 pb-4">
+          <div className="rounded-[24px] border border-[var(--border)] bg-[var(--surface-soft)] p-5 shadow-[var(--shadow-sm)] sm:p-6">
+            <div className="flex items-start justify-between gap-4 border-b border-[var(--border)] pb-5">
               <div>
-                <p className="text-xs font-bold uppercase tracking-[0.18em] text-slate-500">
-                  Chennai intelligence
+                <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-[var(--text-muted)]">
+                  System snapshot
                 </p>
 
-                <p className="mt-1 text-lg font-semibold text-white">
-                  Urban air overview
-                </p>
+                <h2 className="mt-2 text-xl font-semibold text-[var(--text-primary)]">
+                  Chennai monitoring network
+                </h2>
               </div>
 
-              <div className="rounded-full border border-emerald-400/20 bg-emerald-400/10 px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider text-emerald-300">
+              <div className="inline-flex items-center gap-2 rounded-full border border-[#ccefdc] bg-[#effaf4] px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.12em] text-[#26734d]">
+                <Radio className="h-3.5 w-3.5" />
                 Operational
               </div>
             </div>
 
-            <div className="mt-5 grid grid-cols-2 gap-3">
-              <PreviewMetric label="Stations" value="6" />
-              <PreviewMetric label="Forecast horizon" value="1 hour" />
-              <PreviewMetric label="Model" value="XGBoost" />
-              <PreviewMetric label="Coverage" value="Chennai" />
+            <div className="mt-5 space-y-3">
+              <SnapshotRow label="Forecast model" value="XGBoost" />
+              <SnapshotRow label="Prediction horizon" value="+1 hour" />
+              <SnapshotRow label="Monitoring stations" value="6" />
+              <SnapshotRow label="Coverage" value="Chennai" />
+              <SnapshotRow label="Target pollutant" value="PM2.5" />
+              <SnapshotRow label="Replay mode" value="Historical" />
             </div>
 
-            <div className="mt-4 rounded-2xl border border-sky-400/15 bg-sky-400/[0.06] p-5">
-              <p className="text-xs font-bold uppercase tracking-[0.16em] text-sky-300">
-                Intelligence signal
-              </p>
-
-              <p className="mt-3 text-sm leading-6 text-slate-300">
-                AirMind identifies where pollution is likely to worsen,
-                which locations need attention, and what actions may reduce
-                exposure.
-              </p>
-            </div>
-
-            <div className="mt-4 space-y-3">
-              {[82, 64, 47].map((width, index) => (
-                <div
-                  key={width}
-                  className="rounded-2xl border border-white/[0.07] bg-white/[0.025] p-4"
-                >
-                  <div className="flex items-center justify-between">
-                    <div
-                      className="h-2.5 rounded-full bg-slate-700"
-                      style={{ width: `${width}%` }}
-                    />
-
-                    <span className="ml-4 text-xs text-slate-500">
-                      Station {index + 1}
-                    </span>
-                  </div>
-
-                  <div className="mt-3 h-1.5 overflow-hidden rounded-full bg-slate-800">
-                    <motion.div
-                      initial={{ width: 0 }}
-                      animate={{ width: `${width}%` }}
-                      transition={{
-                        duration: 1,
-                        delay: 0.5 + index * 0.15,
-                      }}
-                      className="h-full rounded-full bg-sky-400"
-                    />
-                  </div>
+            <div className="mt-5 rounded-2xl border border-[var(--border)] bg-white p-5">
+              <div className="flex items-center gap-3">
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[var(--primary-soft)] text-[var(--primary-hover)]">
+                  <MapPinned className="h-5 w-5" />
                 </div>
-              ))}
+
+                <div>
+                  <p className="text-sm font-semibold text-[var(--text-primary)]">
+                    City-scale environmental intelligence
+                  </p>
+
+                  <p className="mt-1 text-xs leading-5 text-[var(--text-secondary)]">
+                    Forecasts, hotspot ranking, replay, and intervention support
+                    in one operational view.
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </motion.div>
@@ -162,41 +129,42 @@ export default function HeroSection({
   );
 }
 
-type FeatureBadgeProps = {
-  icon: React.ReactNode;
+type CapabilityItemProps = {
   label: string;
 };
 
-function FeatureBadge({
-  icon,
+function CapabilityItem({
   label,
-}: FeatureBadgeProps) {
+}: CapabilityItemProps) {
   return (
-    <div className="flex items-center gap-3 rounded-2xl border border-white/[0.08] bg-white/[0.035] px-4 py-3 text-sm text-slate-300">
-      <span className="text-sky-300">{icon}</span>
+    <div className="flex items-center gap-3 rounded-2xl border border-[var(--border)] bg-white px-4 py-3 text-sm text-[var(--text-secondary)] shadow-[var(--shadow-sm)]">
+      <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[var(--primary-soft)] text-[var(--primary-hover)]">
+        <Check className="h-3.5 w-3.5" strokeWidth={2.5} />
+      </span>
+
       {label}
     </div>
   );
 }
 
-type PreviewMetricProps = {
+type SnapshotRowProps = {
   label: string;
   value: string;
 };
 
-function PreviewMetric({
+function SnapshotRow({
   label,
   value,
-}: PreviewMetricProps) {
+}: SnapshotRowProps) {
   return (
-    <div className="rounded-2xl border border-white/[0.07] bg-white/[0.025] p-4">
-      <p className="text-[10px] font-bold uppercase tracking-[0.15em] text-slate-500">
+    <div className="flex items-center justify-between gap-4 rounded-2xl border border-[var(--border)] bg-white px-4 py-3.5">
+      <span className="text-sm text-[var(--text-secondary)]">
         {label}
-      </p>
+      </span>
 
-      <p className="mt-2 text-lg font-semibold text-white">
+      <span className="machine-text text-sm font-semibold text-[var(--text-primary)]">
         {value}
-      </p>
+      </span>
     </div>
   );
 }

@@ -1,27 +1,30 @@
 "use client";
 
-import DashboardShell from "@/components/layout/DashboardShell";
-import ProblemSection from "@/components/landing/ProblemSection";
-import HeroSection from "@/components/landing/HeroSection";
 import dynamic from "next/dynamic";
+
+import DashboardShell from "@/components/layout/DashboardShell";
+import HeroSection from "@/components/landing/HeroSection";
+import ProblemSection from "@/components/landing/ProblemSection";
 import { useDashboard } from "@/hooks/useDashboard";
 
 const AirQualityMap = dynamic(
-  () =>
-    import(
-      "@/components/dashboard/AirQualityMap"
-    ),
+  () => import("@/components/dashboard/AirQualityMap"),
   {
     ssr: false,
     loading: () => (
-      <div className="flex min-h-100 items-center justify-center rounded-2xl border border-white/10 bg-black/10">
-        <p className="text-sm text-slate-500">
-          Loading Chennai map...
-        </p>
+      <div className="flex min-h-100 items-center justify-center rounded-2xl border border-[var(--border)] bg-[var(--surface-blue)]">
+        <div className="text-center">
+          <div className="mx-auto h-8 w-8 animate-spin rounded-full border-3 border-[#cfe6f8] border-t-[var(--primary)]" />
+
+          <p className="mt-4 text-sm text-[var(--text-muted)]">
+            Loading Chennai map...
+          </p>
+        </div>
       </div>
     ),
   },
 );
+
 export default function Home() {
   const {
     summary,
@@ -40,11 +43,9 @@ export default function Home() {
   } = useDashboard();
 
   function scrollToDashboard() {
-    document
-      .getElementById("dashboard")
-      ?.scrollIntoView({
-        behavior: "smooth",
-      });
+    document.getElementById("dashboard")?.scrollIntoView({
+      behavior: "smooth",
+    });
   }
 
   if (loading) {
@@ -52,9 +53,9 @@ export default function Home() {
       <DashboardShell>
         <div className="flex min-h-[65vh] items-center justify-center">
           <div className="text-center">
-            <div className="mx-auto h-11 w-11 animate-spin rounded-full border-4 border-sky-400/20 border-t-sky-400" />
+            <div className="mx-auto h-11 w-11 animate-spin rounded-full border-4 border-[#d9ecfb] border-t-[var(--primary)]" />
 
-            <p className="mt-5 text-sm text-slate-400">
+            <p className="mt-5 text-sm text-[var(--text-secondary)]">
               Loading AirMind intelligence...
             </p>
           </div>
@@ -63,93 +64,141 @@ export default function Home() {
     );
   }
 
-  if (
-    error ||
-    !summary ||
-    !metadata
-  ) {
+  if (error || !summary || !metadata) {
     return (
       <DashboardShell>
-        <div className="rounded-3xl border border-red-400/20 bg-red-400/10 p-7">
-          <h2 className="text-xl font-semibold text-red-200">
+        <div className="rounded-2xl border border-[#f1cccc] bg-[var(--danger-soft)] p-7 shadow-[var(--shadow-sm)]">
+          <p className="section-label text-[var(--danger)]">
+            System alert
+          </p>
+
+          <h2 className="mt-2 text-xl font-semibold text-[#a94646]">
             Unable to load dashboard
           </h2>
 
-          <p className="mt-2 text-sm text-red-200/70">
-            {error ??
-              "The API returned an incomplete response."}
+          <p className="mt-2 text-sm leading-6 text-[#b45f5f]">
+            {error ?? "The API returned an incomplete response."}
           </p>
         </div>
       </DashboardShell>
     );
   }
 
-  const rankedStations = [
-    ...stations,
-  ].sort(
-    (a, b) =>
-      a.hotspot_rank -
-      b.hotspot_rank,
+  const rankedStations = [...stations].sort(
+    (a, b) => a.hotspot_rank - b.hotspot_rank,
   );
 
   const displayedFrame =
-    currentFrame -
-    metadata.first_frame +
-    1;
+    currentFrame - metadata.first_frame + 1;
 
-  const formattedTimestamp =
-    timestamp
-      ? new Intl.DateTimeFormat(
-          "en-IN",
-          {
-            dateStyle: "medium",
-            timeStyle: "short",
-            timeZone: "UTC",
-          },
-        ).format(
-          new Date(timestamp),
-        )
-      : "Unavailable";
+  const formattedTimestamp = timestamp
+    ? new Intl.DateTimeFormat("en-IN", {
+        dateStyle: "medium",
+        timeStyle: "short",
+        timeZone: "UTC",
+      }).format(new Date(timestamp))
+    : "Unavailable";
+
+  const replayStartDate = new Intl.DateTimeFormat("en-IN", {
+    dateStyle: "medium",
+    timeZone: "UTC",
+  }).format(new Date(metadata.replay_start_utc));
+
+  const replayEndDate = new Intl.DateTimeFormat("en-IN", {
+    dateStyle: "medium",
+    timeZone: "UTC",
+  }).format(new Date(metadata.replay_end_utc));
 
   return (
-    <DashboardShell
-      forecastTime={
-        summary.forecast_for_utc
-      }
-    >
-      <HeroSection
-        onLaunch={scrollToDashboard}
-      />
+    <DashboardShell forecastTime={summary.forecast_for_utc}>
+      <HeroSection onLaunch={scrollToDashboard} />
 
       <ProblemSection />
 
-      <div
-        id="dashboard"
-        className="scroll-mt-6 pt-8"
-      >
-        <section className="mb-5 rounded-[26px] border border-sky-400/15 bg-slate-900/65 p-5 shadow-xl shadow-black/10 backdrop-blur-xl">
-          <div className="flex flex-col gap-5 xl:flex-row xl:items-center xl:justify-between">
+      <div id="dashboard" className="scroll-mt-6 pt-10">
+        <section className="mb-6">
+          <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+            <div>
+              <p className="eyebrow-label">
+                AirMind operations center
+              </p>
+
+              <h1 className="mt-2 text-3xl font-semibold tracking-[-0.045em] text-[var(--text-primary)] sm:text-4xl">
+                Chennai air-quality intelligence
+              </h1>
+
+              <p className="mt-3 max-w-2xl text-sm leading-6 text-[var(--text-secondary)]">
+                Explore historical pollution patterns, compare
+                monitoring locations, and identify the city&apos;s
+                highest-priority PM2.5 hotspots.
+              </p>
+            </div>
+
+            <div className="status-pill w-fit">
+              <span className="status-dot" />
+              System online
+            </div>
+          </div>
+        </section>
+
+        <section className="surface-panel mb-5 overflow-hidden">
+          <div className="grid divide-y divide-[var(--border)] sm:grid-cols-2 sm:divide-x sm:divide-y-0 xl:grid-cols-5">
+            <StatusItem
+              label="Mode"
+              value="Historical Replay"
+            />
+
+            <StatusItem
+              label="City"
+              value="Chennai"
+            />
+
+            <StatusItem
+              label="Model"
+              value="XGBoost"
+            />
+
+            <StatusItem
+              label="Horizon"
+              value="+1 Hour"
+            />
+
+            <StatusItem
+              label="Stations"
+              value={summary.stations_monitored.toString()}
+            />
+          </div>
+        </section>
+
+        <section className="surface-panel mb-5 p-5 sm:p-6">
+          <div className="flex flex-col gap-6 xl:flex-row xl:items-center xl:justify-between">
             <div>
               <div className="flex flex-wrap items-center gap-3">
-                <span className="inline-flex items-center gap-2 rounded-full border border-emerald-400/20 bg-emerald-400/10 px-3 py-1 text-xs font-semibold text-emerald-300">
-                  <span className="h-2 w-2 rounded-full bg-emerald-300" />
-                  Historical replay
-                </span>
+                <p className="section-label">
+                  01 / Temporal replay
+                </p>
 
                 {frameLoading && (
-                  <span className="text-xs text-sky-300">
-                    Updating frame...
+                  <span className="inline-flex items-center gap-2 rounded-full bg-[var(--primary-soft)] px-3 py-1 text-xs font-medium text-[var(--primary-hover)]">
+                    <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[var(--primary)]" />
+                    Updating frame
                   </span>
                 )}
               </div>
 
-              <h2 className="mt-3 text-xl font-semibold text-white">
-                Chennai air-quality operations replay
+              <h2 className="mt-2 text-xl font-semibold tracking-[-0.025em] text-[var(--text-primary)]">
+                Historical air-quality playback
               </h2>
 
-              <p className="mt-1 text-sm text-slate-400">
-                Frame {displayedFrame} of{" "}
-                {metadata.total_frames} ·{" "}
+              <p className="machine-text mt-2 text-xs text-[var(--text-muted)]">
+                FRAME{" "}
+                {displayedFrame.toString().padStart(2, "0")} /{" "}
+                {metadata.total_frames
+                  .toString()
+                  .padStart(2, "0")}
+                <span className="mx-2 text-[var(--border-strong)]">
+                  •
+                </span>
                 {formattedTimestamp} UTC
               </p>
             </div>
@@ -159,230 +208,256 @@ export default function Home() {
                 type="button"
                 onClick={goToPreviousFrame}
                 disabled={
-                  currentFrame <=
-                  metadata.first_frame
+                  currentFrame <= metadata.first_frame
                 }
-                className="rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-sm font-semibold text-slate-200 transition hover:border-sky-400/30 hover:bg-sky-400/10 disabled:cursor-not-allowed disabled:opacity-40"
+                className="control-button"
               >
+                <span aria-hidden="true">←</span>
                 Previous
               </button>
 
               <button
                 type="button"
                 onClick={togglePlayback}
-                className="min-w-24 rounded-xl bg-sky-400 px-5 py-2 text-sm font-bold text-slate-950 transition hover:bg-sky-300"
+                className="control-button control-button-primary min-w-28"
               >
-                {isPlaying
-                  ? "Pause"
-                  : "Play"}
+                <span aria-hidden="true">
+                  {isPlaying ? "Ⅱ" : "▶"}
+                </span>
+
+                {isPlaying ? "Pause" : "Play"}
               </button>
 
               <button
                 type="button"
                 onClick={goToNextFrame}
                 disabled={
-                  currentFrame >=
-                  metadata.last_frame
+                  currentFrame >= metadata.last_frame
                 }
-                className="rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-sm font-semibold text-slate-200 transition hover:border-sky-400/30 hover:bg-sky-400/10 disabled:cursor-not-allowed disabled:opacity-40"
+                className="control-button"
               >
                 Next
+                <span aria-hidden="true">→</span>
               </button>
             </div>
           </div>
 
-          <div className="mt-5">
+          <div className="mt-6 rounded-xl border border-[var(--border)] bg-[var(--surface-soft)] px-4 py-4 sm:px-5">
             <input
               type="range"
-              min={
-                metadata.first_frame
-              }
-              max={
-                metadata.last_frame
-              }
+              min={metadata.first_frame}
+              max={metadata.last_frame}
               value={currentFrame}
               onChange={(event) =>
-                goToFrame(
-                  Number(
-                    event.target.value,
-                  ),
-                )
+                goToFrame(Number(event.target.value))
               }
-              className="w-full cursor-pointer accent-sky-400"
+              className="w-full cursor-pointer"
               aria-label="Replay frame"
             />
 
-            <div className="mt-2 flex justify-between text-[11px] text-slate-500">
-              <span>
-                {new Intl.DateTimeFormat(
-                  "en-IN",
-                  {
-                    dateStyle: "medium",
-                    timeZone: "UTC",
-                  },
-                ).format(
-                  new Date(
-                    metadata.replay_start_utc,
-                  ),
-                )}
-              </span>
-
-              <span>
-                {new Intl.DateTimeFormat(
-                  "en-IN",
-                  {
-                    dateStyle: "medium",
-                    timeZone: "UTC",
-                  },
-                ).format(
-                  new Date(
-                    metadata.replay_end_utc,
-                  ),
-                )}
-              </span>
+            <div className="machine-text mt-3 flex justify-between gap-4 text-[10px] uppercase tracking-[0.08em] text-[var(--text-muted)] sm:text-[11px]">
+              <span>{replayStartDate}</span>
+              <span>{replayEndDate}</span>
             </div>
           </div>
         </section>
 
-        <section className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-          <MetricCard
-            label="Stations monitored"
-            value={summary.stations_monitored.toString()}
-            note="Active Chennai monitoring locations"
-          />
+        <section className="mb-5">
+          <div className="mb-3 flex items-center justify-between">
+            <div>
+              <p className="section-label">
+                02 / Network summary
+              </p>
 
-          <MetricCard
-            label="Average forecast"
-            value={`${summary.average_forecast.toFixed(1)} µg/m³`}
-            note="Next-hour network average"
-          />
+              <h2 className="mt-1 text-lg font-semibold text-[var(--text-primary)]">
+                Current replay snapshot
+              </h2>
+            </div>
 
-          <MetricCard
-            label="Highest forecast"
-            value={`${summary.highest_forecast.toFixed(1)} µg/m³`}
-            note={
-              summary.top_hotspot
-                .station_name
-            }
-          />
-
-          <MetricCard
-            label="Stations needing caution"
-            value={summary.stations_needing_caution.toString()}
-            note="Moderately polluted or worse"
-          />
-        </section>
-
-        <section className="mt-5 rounded-[26px] border border-sky-400/15 bg-linear-to-r from-sky-400/8 via-slate-900/70 to-slate-900/60 p-6 shadow-xl shadow-black/10 backdrop-blur-xl">
-          <p className="text-xs font-bold uppercase tracking-[0.2em] text-sky-300">
-            AirMind intelligence
-          </p>
-
-          <p className="mt-3 max-w-6xl text-base leading-7 text-slate-300">
-            <span className="font-semibold text-white">
-              {
-                summary.top_hotspot
-                  .station_name
-              }
-            </span>{" "}
-            is predicted to be
-            Chennai&apos;s highest PM2.5
-            hotspot during the next hour
-            at{" "}
-            <span className="font-semibold text-white">
-              {summary.top_hotspot.forecast_pm25.toFixed(
-                1,
-              )}{" "}
-              µg/m³
-            </span>
-            . Pollution is rising at{" "}
-            <span className="font-semibold text-white">
-              {
-                summary.rising_stations
-              }
-            </span>{" "}
-            monitored stations, while{" "}
-            <span className="font-semibold text-white">
-              {
-                summary.improving_stations
-              }
-            </span>{" "}
-            stations are showing
-            improving conditions.
-          </p>
-        </section>
-
-        <section className="mt-5 grid gap-5 xl:grid-cols-[minmax(0,1.65fr)_minmax(320px,0.75fr)]">
-          <div className="min-h-130 rounded-[26px] border border-white/8 bg-slate-900/55 p-6 shadow-xl shadow-black/10 backdrop-blur-xl">
-            <p className="text-xs font-bold uppercase tracking-[0.18em] text-slate-500">
-              Geographic intelligence
+            <p className="machine-text hidden text-xs text-[var(--text-muted)] sm:block">
+              NEXT-HOUR FORECAST
             </p>
-
-            <h2 className="mt-2 text-xl font-semibold text-white">
-              Chennai air-quality map
-            </h2>
-
-            <div className="mt-5">
-  <AirQualityMap
-    stations={rankedStations}
-  />
-</div>
           </div>
 
-          <div className="min-h-130 rounded-[26px] border border-white/8 bg-slate-900/55 p-6 shadow-xl shadow-black/10 backdrop-blur-xl">
-            <p className="text-xs font-bold uppercase tracking-[0.18em] text-slate-500">
-              Priority locations
-            </p>
+          <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+            <MetricCard
+              label="Stations monitored"
+              value={summary.stations_monitored.toString()}
+              unit="active"
+              note="Chennai monitoring locations"
+            />
 
-            <h2 className="mt-2 text-xl font-semibold text-white">
-              Top hotspots
-            </h2>
+            <MetricCard
+              label="Average forecast"
+              value={summary.average_forecast.toFixed(1)}
+              unit="µg/m³"
+              note="Next-hour network average"
+            />
+
+            <MetricCard
+              label="Highest forecast"
+              value={summary.highest_forecast.toFixed(1)}
+              unit="µg/m³"
+              note={summary.top_hotspot.station_name}
+              highlighted
+            />
+
+            <MetricCard
+              label="Stations needing caution"
+              value={summary.stations_needing_caution.toString()}
+              unit="stations"
+              note="Moderately polluted or worse"
+            />
+          </div>
+        </section>
+
+        <section className="mb-5 overflow-hidden rounded-2xl border border-[#cde4f7] bg-[linear-gradient(110deg,#eef8ff_0%,#ffffff_55%,#f4faff_100%)] shadow-[var(--shadow-sm)]">
+          <div className="flex">
+            <div className="w-1.5 shrink-0 bg-[var(--primary)]" />
+
+            <div className="p-6 sm:p-7">
+              <p className="section-label text-[var(--primary)]">
+                03 / AirMind intelligence
+              </p>
+
+              <h2 className="mt-2 text-lg font-semibold text-[var(--text-primary)]">
+                Automated network interpretation
+              </h2>
+
+              <p className="mt-3 max-w-6xl text-sm leading-7 text-[var(--text-secondary)] sm:text-[15px]">
+                <span className="font-semibold text-[var(--text-primary)]">
+                  {summary.top_hotspot.station_name}
+                </span>{" "}
+                is predicted to be Chennai&apos;s highest PM2.5
+                hotspot during the next hour, reaching{" "}
+                <span className="machine-text font-semibold text-[var(--primary-hover)]">
+                  {summary.top_hotspot.forecast_pm25.toFixed(
+                    1,
+                  )}{" "}
+                  µg/m³
+                </span>
+                . Pollution is rising across{" "}
+                <span className="machine-text font-semibold text-[var(--text-primary)]">
+                  {summary.rising_stations}
+                </span>{" "}
+                monitored stations, while{" "}
+                <span className="machine-text font-semibold text-[var(--text-primary)]">
+                  {summary.improving_stations}
+                </span>{" "}
+                stations are showing improving conditions.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section className="grid gap-5 xl:grid-cols-[minmax(0,1.7fr)_minmax(330px,0.72fr)]">
+          <div className="surface-panel min-h-130 overflow-hidden p-5 sm:p-6">
+            <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+              <div>
+                <p className="section-label">
+                  04 / Network overview
+                </p>
+
+                <h2 className="mt-1 text-xl font-semibold tracking-[-0.025em] text-[var(--text-primary)]">
+                  Chennai air-quality map
+                </h2>
+
+                <p className="mt-2 text-sm text-[var(--text-secondary)]">
+                  Geographic distribution of forecasted
+                  station-level PM2.5 conditions.
+                </p>
+              </div>
+
+              <div className="machine-text rounded-lg border border-[var(--border)] bg-[var(--surface-blue)] px-3 py-2 text-[10px] uppercase tracking-[0.1em] text-[var(--text-muted)]">
+                Live frame {displayedFrame}
+              </div>
+            </div>
+
+            <div className="mt-5 overflow-hidden rounded-2xl border border-[var(--border)]">
+              <AirQualityMap stations={rankedStations} />
+            </div>
+          </div>
+
+          <div className="surface-panel min-h-130 p-5 sm:p-6">
+            <div>
+              <p className="section-label">
+                05 / Hotspot priority
+              </p>
+
+              <h2 className="mt-1 text-xl font-semibold tracking-[-0.025em] text-[var(--text-primary)]">
+                Priority locations
+              </h2>
+
+              <p className="mt-2 text-sm text-[var(--text-secondary)]">
+                Ranked by predicted next-hour PM2.5
+                concentration.
+              </p>
+            </div>
 
             <div className="mt-5 space-y-3">
               {rankedStations
                 .slice(0, 6)
                 .map((station) => (
                   <article
-                    key={
-                      station.location_id
-                    }
-                    className="flex items-center justify-between rounded-2xl border border-white/7 bg-white/2.5 p-4 transition hover:border-sky-400/20 hover:bg-sky-400/4"
+                    key={station.location_id}
+                    className="group flex items-center justify-between rounded-xl border border-[var(--border)] bg-[var(--surface-soft)] p-4 transition duration-200 hover:-translate-y-0.5 hover:border-[var(--border-strong)] hover:bg-white hover:shadow-[var(--shadow-sm)]"
                   >
                     <div className="flex min-w-0 items-center gap-3">
-                      <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-white/5 text-sm font-bold text-slate-300">
-                        {
-                          station.hotspot_rank
-                        }
+                      <div className="machine-text flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-[#d6e8f6] bg-[var(--surface-blue)] text-sm font-semibold text-[var(--primary-hover)]">
+                        {station.hotspot_rank
+                          .toString()
+                          .padStart(2, "0")}
                       </div>
 
                       <div className="min-w-0">
-                        <p className="truncate text-sm font-semibold text-slate-100">
-                          {
-                            station.station_name
-                          }
+                        <p className="truncate text-sm font-semibold text-[var(--text-primary)]">
+                          {station.station_name}
                         </p>
 
-                        <p className="mt-1 text-xs text-slate-500">
-                          {
-                            station.aqi_category
-                          }
-                        </p>
+                        <div className="mt-1.5 flex items-center gap-2">
+                          <span
+                            className={`h-2 w-2 rounded-full ${getCategoryDotClass(
+                              station.aqi_category,
+                            )}`}
+                          />
+
+                          <p className="truncate text-xs text-[var(--text-muted)]">
+                            {station.aqi_category}
+                          </p>
+                        </div>
                       </div>
                     </div>
 
                     <div className="ml-4 text-right">
-                      <p className="text-base font-bold text-white">
+                      <p className="machine-text text-base font-semibold text-[var(--text-primary)]">
                         {station.predicted_pm25_xgboost.toFixed(
                           1,
                         )}
                       </p>
 
-                      <p className="text-[10px] uppercase tracking-wider text-slate-600">
+                      <p className="machine-text mt-1 text-[9px] uppercase tracking-[0.11em] text-[var(--text-muted)]">
                         µg/m³
                       </p>
                     </div>
                   </article>
                 ))}
+            </div>
+
+            <div className="mt-5 rounded-xl border border-[var(--border)] bg-[var(--surface-blue)] p-4">
+              <p className="machine-text text-[10px] uppercase tracking-[0.12em] text-[var(--text-muted)]">
+                Highest-risk location
+              </p>
+
+              <p className="mt-2 truncate text-sm font-semibold text-[var(--text-primary)]">
+                {summary.top_hotspot.station_name}
+              </p>
+
+              <p className="machine-text mt-1 text-xs text-[var(--primary-hover)]">
+                {summary.top_hotspot.forecast_pm25.toFixed(
+                  1,
+                )}{" "}
+                µg/m³
+              </p>
             </div>
           </div>
         </section>
@@ -391,30 +466,104 @@ export default function Home() {
   );
 }
 
+type StatusItemProps = {
+  label: string;
+  value: string;
+};
+
+function StatusItem({
+  label,
+  value,
+}: StatusItemProps) {
+  return (
+    <div className="px-5 py-4 sm:px-6">
+      <p className="machine-text text-[9px] font-semibold uppercase tracking-[0.14em] text-[var(--text-muted)]">
+        {label}
+      </p>
+
+      <p className="mt-1.5 truncate text-sm font-semibold text-[var(--text-primary)]">
+        {value}
+      </p>
+    </div>
+  );
+}
+
 type MetricCardProps = {
   label: string;
   value: string;
+  unit: string;
   note: string;
+  highlighted?: boolean;
 };
 
 function MetricCard({
   label,
   value,
+  unit,
   note,
+  highlighted = false,
 }: MetricCardProps) {
   return (
-    <article className="rounded-[22px] border border-white/8 bg-slate-900/60 p-5 shadow-xl shadow-black/10 backdrop-blur-xl transition duration-200 hover:-translate-y-0.5 hover:border-sky-400/20">
-      <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-slate-500">
-        {label}
-      </p>
+    <article
+      className={`metric-card p-5 ${
+        highlighted
+          ? "border-[#b9dbf5] bg-[linear-gradient(145deg,#ffffff_0%,#eef8ff_100%)]"
+          : ""
+      }`}
+    >
+      <div className="relative z-10">
+        <div className="flex items-start justify-between gap-3">
+          <p className="section-label">
+            {label}
+          </p>
 
-      <p className="mt-3 text-3xl font-bold tracking-[-0.04em] text-white">
-        {value}
-      </p>
+          {highlighted && (
+            <span className="rounded-full bg-[var(--primary-soft)] px-2.5 py-1 text-[9px] font-semibold uppercase tracking-[0.1em] text-[var(--primary-hover)]">
+              Peak
+            </span>
+          )}
+        </div>
 
-      <p className="mt-2 truncate text-xs text-slate-500">
-        {note}
-      </p>
+        <div className="mt-5 flex items-end gap-2">
+          <p className="metric-value">
+            {value}
+          </p>
+
+          <p className="metric-unit pb-0.5">
+            {unit}
+          </p>
+        </div>
+
+        <div className="mt-5 h-px bg-[var(--border)]" />
+
+        <p className="mt-3 truncate text-xs text-[var(--text-muted)]">
+          {note}
+        </p>
+      </div>
     </article>
   );
+}
+
+function getCategoryDotClass(category: string) {
+  const normalizedCategory = category.toLowerCase();
+
+  if (
+    normalizedCategory.includes("severe") ||
+    normalizedCategory.includes("very poor")
+  ) {
+    return "bg-[#d97777]";
+  }
+
+  if (normalizedCategory.includes("poor")) {
+    return "bg-[#e4a665]";
+  }
+
+  if (
+    normalizedCategory.includes("moderate") ||
+    normalizedCategory.includes("satisfactory")
+  ) {
+    return "bg-[#d7b45f]";
+  }
+
+  return "bg-[#67ad8f]";
 }
