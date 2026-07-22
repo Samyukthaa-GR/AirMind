@@ -6,6 +6,9 @@ import DashboardShell from "@/components/layout/DashboardShell";
 import HeroSection from "@/components/landing/HeroSection";
 import ProblemSection from "@/components/landing/ProblemSection";
 import { useDashboard } from "@/hooks/useDashboard";
+import { useState } from "react";
+import TourGuide from "@/components/TourGuide";
+import { Sparkles } from "lucide-react";
 
 const AirQualityMap = dynamic(
   () => import("@/components/dashboard/AirQualityMap"),
@@ -26,6 +29,7 @@ const AirQualityMap = dynamic(
 );
 
 export default function Home() {
+  const [runTour, setRunTour] = useState(false);
   const {
     summary,
     stations,
@@ -111,8 +115,13 @@ export default function Home() {
   }).format(new Date(metadata.replay_end_utc));
 
   return (
-    <DashboardShell forecastTime={summary.forecast_for_utc}>
-      <HeroSection onLaunch={scrollToDashboard} />
+  <DashboardShell forecastTime={summary.forecast_for_utc}>
+    <TourGuide
+      run={runTour}
+      onFinish={() => setRunTour(false)}
+    />
+
+    <HeroSection onLaunch={scrollToDashboard} />
 
       <ProblemSection />
 
@@ -140,10 +149,21 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="status-pill w-fit">
-              <span className="status-dot" />
-              System online
-            </div>
+            <div className="flex flex-wrap items-center gap-3">
+  <button
+  type="button"
+  onClick={() => setRunTour(true)}
+  className="group inline-flex min-h-10 items-center justify-center gap-2 rounded-xl border border-[var(--border)] bg-white px-4 text-[0.82rem] font-semibold text-[var(--text-secondary)] shadow-[var(--shadow-sm)] transition duration-200 hover:-translate-y-0.5 hover:border-[var(--border-strong)] hover:bg-[var(--primary-subtle)] hover:text-[var(--primary-hover)] hover:shadow-[var(--shadow-md)]"
+>
+  <Sparkles className="h-4 w-4 text-[var(--primary)] transition-transform duration-200 group-hover:rotate-12" />
+  Start Guided Tour
+</button>
+
+  <div className="status-pill w-fit">
+    <span className="status-dot" />
+    System online
+  </div>
+</div>
           </div>
         </section>
 
@@ -277,7 +297,10 @@ export default function Home() {
 
         {/* Network summary */}
 
-        <section className="mb-5">
+<section
+  id="forecast-summary"
+  className="mb-5 scroll-mt-8"
+>
           <div className="mb-3 flex items-center justify-between">
             <div>
               <p className="section-label">
@@ -552,8 +575,10 @@ className="group inline-flex shrink-0 items-center gap-2 rounded-xl border borde
         {/* Map and hotspot ranking */}
 
         <section className="grid gap-5 xl:grid-cols-[minmax(0,1.7fr)_minmax(330px,0.72fr)]">
-          <div className="surface-panel min-h-130 overflow-hidden p-5 sm:p-6">
-            <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+  <div
+    id="air-quality-map"
+    className="surface-panel min-h-130 scroll-mt-8 overflow-hidden p-5 sm:p-6"
+  >            <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
               <div>
                 <p className="section-label">
                   04 / Network overview

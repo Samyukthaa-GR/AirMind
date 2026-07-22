@@ -467,6 +467,3 @@ input[type="range"]::-moz-range-thumb {
     animation-iteration-count: 1 !important;
   }
 }
-body {
-  background: hotpink !important;
-}
