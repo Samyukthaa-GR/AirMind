@@ -8,7 +8,7 @@ AirMind is an AI-driven environmental intelligence platform that transforms real
 
 # Demo Video
 
-Watch a 3-minute walkthrough of AirMind here:
+Watch a 4-minute walkthrough of AirMind here:
 
 👉 https://drive.google.com/file/d/1jVggToJY6ViiLqf1pairEjZQkahnFdKr/view?usp=drive_link
 
