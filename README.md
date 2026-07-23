@@ -6,6 +6,14 @@ AirMind is an AI-driven environmental intelligence platform that transforms real
 
 ---
 
+# Demo Video
+
+Watch a 3-minute walkthrough of AirMind here:
+
+👉 https://drive.google.com/file/d/1jVggToJY6ViiLqf1pairEjZQkahnFdKr/view?usp=drive_link
+
+---
+
 ## Overview
 
 Air pollution remains one of the most pressing environmental challenges in rapidly growing urban areas. Although cities deploy Continuous Ambient Air Quality Monitoring Stations (CAAQMS) to measure pollutants such as PM2.5 and PM10, existing systems are primarily designed for monitoring rather than decision support. Authorities often receive historical or real-time measurements but lack predictive insights that help prioritize interventions before pollution reaches hazardous levels.
@@ -227,3 +235,7 @@ The platform enables authorities to move from reactive monitoring to proactive e
 - Automated alert notifications
 
 ---
+
+# Project Report
+
+👉 https://drive.google.com/file/d/1ofBJFUGi2mREsNk8AKklClTXs8OUlCQD/view?usp=sharing
